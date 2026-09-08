@@ -1,1 +1,42 @@
+#include <stdio.h>
 
+int main() {
+    int secret = 7;
+    int guess;
+    int max_attempts = 3;
+    int won = 0;
+
+    printf("Guess a number between 1 and 10.\n");
+
+    for (int attempt = 1; attempt <= max_attempts; attempt++) {
+        printf("Attempt %d/%d. Enter your guess: ", attempt, max_attempts);
+        
+        // Read user input
+        if (scanf("%d", &guess) != 1) {
+            printf("Invalid input. Exiting.\n");
+            return 1;
+        }
+
+        // Check the guess
+        if (guess == secret) {
+            printf("Correct! You win!\n");
+            won = 1;
+            break; // Exit the loop immediately
+        } else if (guess < secret) {
+            if (attempt < max_attempts) {
+                printf("Too low! Try again.\n");
+            }
+        } else {
+            if (attempt < max_attempts) {
+                printf("Too high! Try again.\n");
+            }
+        }
+    }
+
+    // Print lose message if maximum attempts reached without guessing correctly
+    if (!won) {
+        printf("Out of attempts! You lose. The secret number was %d.\n", secret);
+    }
+
+    return 0;
+}
